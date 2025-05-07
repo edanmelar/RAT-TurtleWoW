@@ -44,6 +44,9 @@ Currently displays the following cooldowns for everyone who has the addon instal
 * Challenging Roar
 * Tranquility
 
+[Priest]
+* Light Well
+
 [Slash Commands]
 
 * /Rat show
