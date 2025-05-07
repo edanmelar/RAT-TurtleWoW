@@ -1,5 +1,5 @@
 --########### Raid Ability Tracker 
---########### By Atreyyo @ VanillaGaming.org
+--########### By Atreyyo @ VanillaGaming.org - Modified by Mithadana @ Turtle-wow.org
 --##########################################
 
 Rat = CreateFrame("Button", "Rat", UIParent); -- Create first frame
@@ -25,7 +25,7 @@ if (GetLocale() == "deDE") then
 		["Herausforderungsruf"] = "Challenging Shout",
 		["Wiedergeburt"] = "Rebirth",
 		["Schildwall"] = "Shield Wall",
-		["Berserkerwut"] = "Berserker Rage",
+		["Todeswunsch"] = "Death Wish",
 		["Zuschlagen"] = "Pummel",
 		["Entwaffnen"] = "Disarm",
 		["Erheblicher Seelenstein"] = "Major Soulstone",
@@ -36,7 +36,12 @@ if (GetLocale() == "deDE") then
 		["Einlullender Schuss"] = "Tranquilizing Shot",
 		["Tritt"] = "Kick",
 		["Reinkarnation"] = "Reincarnation",
-		["Totem der Manaflut"] = "Mana Tide Totem",	
+		["Totem der Manaflut"] = "Mana Tide Totem",
+		["Bollwerk der Rechtschaffenen"] = "Bulwark of the Righteous",
+		["Ruhe"] = "Tranquility",
+		["Gegenzauber"] = "Counterspell",
+		["Erdschock"] = "Earth Shock",
+		["Lichtschacht"] = "Light Well",
 	}
 elseif (GetLocale() == "frFR") then
 	L = { 
@@ -45,7 +50,7 @@ elseif (GetLocale() == "frFR") then
 		["Cri de défi"] = "Challenging Shout",
 		["Renaissance"] = "Rebirth",
 		["Mur protecteur"] = "Shield Wall",
-		["Rage berserker"] = "Berserker Rage",
+		["Souhait de mort"] = "Death Wish",
 		["Volée de coups"] = "Pummel",
 		["Désarmement"] = "Disarm",
 		["pierre d'âme supérieure"] = "Major Soulstone",
@@ -57,6 +62,12 @@ elseif (GetLocale() == "frFR") then
 		["Coup de pied"] = "Kick",
 		["Réincarnation"] = "Reincarnation",
 		["Totem Fontaine de mana"] = "Mana Tide Totem",
+		["Rempart des Justes"] = "Bulwark of the Righteous",
+		["Tranquillité"] = "Tranquility",
+		["Contresort"] = "Counterspell",
+		["Choc terrestre"] = "Earth Shock",
+		["Puits de lumière"] = "Light Well",
+		
 	}
 else
 	L = {
@@ -65,7 +76,7 @@ else
 		["Challenging Shout"] = "Challenging Shout",
 		["Rebirth"] = "Rebirth",
 		["Shield Wall"] = "Shield Wall",
-		["Berserker Rage"] = "Berserker Rage",
+		["Death Wish"] = "Death Wish",
 		["Pummel"] = "Pummel",
 		["Disarm"] = "Disarm",
 		["Major Soulstone"] = "Major Soulstone",
@@ -76,7 +87,12 @@ else
 		["Tranquilizing Shot"] = "Tranquilizing Shot",
 		["Kick"] = "Kick",
 		["Reincarnation"] = "Reincarnation",
-		["Mana Tide Totem"] = "Mana Tide Totem",	
+		["Mana Tide Totem"] = "Mana Tide Totem",
+		["Bulwark of the Righteous"] = "Bulwark of the Righteous",
+		["Tranquility"] = "Tranquility",
+		["Counterspell"] = "Counterspell",
+		["Earth Shock"] = "Earth Shock",
+		["Light Well"] = "Light Well",
 	}
 end																	
 
@@ -96,7 +112,7 @@ cdtbl = {
 	["Challenging Shout"] = "Interface\\Icons\\Ability_BullRush",
 	["Rebirth"] = "Interface\\Icons\\Spell_Nature_Reincarnation",
 	["Shield Wall"] = "Interface\\Icons\\Ability_Warrior_ShieldWall",
-	["Berserker Rage"] = "Interface\\Icons\\Spell_Nature_AncestralGuardian",
+	["Death Wish"] = "Interface\\Icons\\Spell_Shadow_DeathPact",
 	["Pummel"] = "Interface\\Icons\\INV_Gauntlets_04",
 	["Disarm"] = "Interface\\Icons\\Ability_Warrior_Disarm",
 	["Major Soulstone"] = "Interface\\Icons\\INV_Misc_Orb_04",
@@ -108,6 +124,11 @@ cdtbl = {
 	["Kick"] = "Interface\\Icons\\Ability_Kick",
 	["Reincarnation"] = "Interface\\Icons\\Spell_Nature_Reincarnation",
 	["Mana Tide Totem"] = "Interface\\Icons\\Spell_Frost_SummonWaterElemental",
+	["Bulwark of the Righteous"] = "Interface\\Icons\\Ability_Warrior_VictoryRush",
+	["Tranquility"] = "Interface\\Icons\\Spell_Nature_Tranquility",
+	["Counterspell"] = "Interface\\Icons\\Spell_Frost_IceShock",
+	["Earth Shock"] = "Interface\\Icons\\Spell_Nature_EarthShock",
+	["Light Well"] = "Interface\\Icons\\Spell_Holy_SummonLightwell",
 }
 
 Rat_Font = {
@@ -231,6 +252,22 @@ function RatDefault()
 		Rat.Mainframe.WarlockFrame.Icon:SetVertexColor(1.0, 1.0, 1.0)
 	elseif Rat_Settings["Warlock"] == 0 then
 		Rat.Mainframe.WarlockFrame.Icon:SetVertexColor(0.5, 0.5, 0.5)
+	end
+	
+	if Rat_Settings["Mage"] == nil then 
+		Rat_Settings["Mage"] = 1 
+	elseif Rat_Settings["Mage"] == 1 then
+		Rat.Mainframe.MageFrame.Icon:SetVertexColor(1.0, 1.0, 1.0)
+	elseif Rat_Settings["Mage"] == 0 then
+		Rat.Mainframe.MageFrame.Icon:SetVertexColor(0.5, 0.5, 0.5)
+	end
+	
+	if Rat_Settings["Priest"] == nil then 
+		Rat_Settings["Priest"] = 1 
+	elseif Rat_Settings["Priest"] == 1 then
+		Rat.Mainframe.PriestFrame.Icon:SetVertexColor(1.0, 1.0, 1.0)
+	elseif Rat_Settings["Priest"] == 0 then
+		Rat.Mainframe.PriestFrame.Icon:SetVertexColor(0.5, 0.5, 0.5)
 	end
 	
 	if Rat_unit == nil then 
@@ -465,7 +502,7 @@ function Rat.Mainframe:ConfigFrame()
 			}
 	}
 	self:SetFrameStrata("LOW")
-	self:SetWidth(250) -- Set these to whatever height/width is needed 
+	self:SetWidth(300) -- Set these to whatever height/width is needed 
 	self:SetHeight(21) -- for your Texture
 	self:SetPoint("CENTER",0,0)
 	self:SetMovable(1)
@@ -535,7 +572,7 @@ function Rat.Mainframe:ConfigFrame()
 	self.DruidFrame:SetWidth(16)
 	self.DruidFrame:SetHeight(16)
 	self.DruidFrame:SetBackdropColor(0,0,0,1)
-	self.DruidFrame:SetPoint('TOPRIGHT', -24, -1)
+	self.DruidFrame:SetPoint('TOPRIGHT', -41, -1)
 	self.DruidFrame:SetFrameStrata('MEDIUM')
 	self.DruidFrame.Icon = self.DruidFrame:CreateTexture(nil, 'ARTWORK')
 	self.DruidFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
@@ -567,7 +604,7 @@ function Rat.Mainframe:ConfigFrame()
 	self.HunterFrame:SetWidth(16)
 	self.HunterFrame:SetHeight(16)
 	self.HunterFrame:SetBackdropColor(0,0,0,1)
-	self.HunterFrame:SetPoint('TOPRIGHT', -41, -1)
+	self.HunterFrame:SetPoint('TOPRIGHT', -116, -1)
 	self.HunterFrame:SetFrameStrata('MEDIUM')
 	self.HunterFrame.Icon = self.HunterFrame:CreateTexture(nil, 'ARTWORK')
 	self.HunterFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
@@ -599,7 +636,7 @@ function Rat.Mainframe:ConfigFrame()
 	self.PaladinFrame:SetWidth(16)
 	self.PaladinFrame:SetHeight(16)
 	self.PaladinFrame:SetBackdropColor(0,0,0,1)
-	self.PaladinFrame:SetPoint('TOPRIGHT', -58, -1)
+	self.PaladinFrame:SetPoint('TOPRIGHT', -79, -1)
 	self.PaladinFrame:SetFrameStrata('MEDIUM')
 	self.PaladinFrame.Icon = self.PaladinFrame:CreateTexture(nil, 'ARTWORK')
 	self.PaladinFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
@@ -631,7 +668,7 @@ function Rat.Mainframe:ConfigFrame()
 	self.ShamanFrame:SetWidth(16)
 	self.ShamanFrame:SetHeight(16)
 	self.ShamanFrame:SetBackdropColor(0,0,0,1)
-	self.ShamanFrame:SetPoint('TOPRIGHT', -58, -1)
+	self.ShamanFrame:SetPoint('TOPRIGHT', -23, -1)
 	self.ShamanFrame:SetFrameStrata('MEDIUM')
 	self.ShamanFrame.Icon = self.ShamanFrame:CreateTexture(nil, 'ARTWORK')
 	self.ShamanFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
@@ -663,7 +700,7 @@ function Rat.Mainframe:ConfigFrame()
 	self.RogueFrame = CreateFrame('Button', "Rogue", self)
 	self.RogueFrame:SetWidth(16)
 	self.RogueFrame:SetHeight(16)
-	self.RogueFrame:SetPoint('TOPRIGHT', -75, -1)
+	self.RogueFrame:SetPoint('TOPRIGHT', -97, -1)
 	self.RogueFrame:SetFrameStrata('MEDIUM')
 	self.RogueFrame.Icon = self.RogueFrame:CreateTexture(nil, 'ARTWORK')
 	self.RogueFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
@@ -694,7 +731,7 @@ function Rat.Mainframe:ConfigFrame()
 	self.WarlockFrame = CreateFrame('Button', "Warlock", self)
 	self.WarlockFrame:SetWidth(16)
 	self.WarlockFrame:SetHeight(16)
-	self.WarlockFrame:SetPoint('TOPRIGHT', -92, -1)
+	self.WarlockFrame:SetPoint('TOPRIGHT', -152, -1)
 	self.WarlockFrame:SetFrameStrata('MEDIUM')
 	self.WarlockFrame.Icon = self.WarlockFrame:CreateTexture(nil, 'ARTWORK')
 	self.WarlockFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
@@ -719,13 +756,45 @@ function Rat.Mainframe:ConfigFrame()
 				end
 			end
 		end)
+		
+		
+	-- Mage option frame
+	local r, l, t, b = Rat:ClassPos("Mage")
+	self.MageFrame = CreateFrame('Button', "Mage", self)
+	self.MageFrame:SetWidth(16)
+	self.MageFrame:SetHeight(16)
+	self.MageFrame:SetPoint('TOPRIGHT', -134, -1)
+	self.MageFrame:SetFrameStrata('MEDIUM')
+	self.MageFrame.Icon = self.MageFrame:CreateTexture(nil, 'ARTWORK')
+	self.MageFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
+	self.MageFrame.Icon:SetTexCoord(r, l, t, b)
+	self.MageFrame.Icon:SetPoint('TOPRIGHT', -1, -1)
+	self.MageFrame.Icon:SetWidth(16)
+	self.MageFrame.Icon:SetHeight(16)
+	self.MageFrame:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(self.MageFrame, "ANCHOR_TOPRIGHT");
+		GameTooltip:SetText(this:GetName(), 0.25, 0.78, 0.92, 1, 1);
+		GameTooltip:Show()
+		end)
+	self.MageFrame:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	self.MageFrame:SetScript("OnMouseDown", function()
+			if (arg1 == "LeftButton") then
+				if Rat_Settings[this:GetName()] == 1 then
+					Rat_Settings[this:GetName()] = 0
+					self.MageFrame.Icon:SetVertexColor(0.5, 0.5, 0.5)
+				else
+					Rat_Settings[this:GetName()] = 1
+					self.MageFrame.Icon:SetVertexColor(1.0, 1.0, 1.0)
+				end
+			end
+		end)
 	
 	-- Warrior option frame
 	local r, l, t, b = Rat:ClassPos("Warrior")
 	self.WarriorFrame = CreateFrame('Button', "Warrior", self)
 	self.WarriorFrame:SetWidth(16)
 	self.WarriorFrame:SetHeight(16)
-	self.WarriorFrame:SetPoint('TOPRIGHT', -109, -1)
+	self.WarriorFrame:SetPoint('TOPRIGHT', -171, -1)
 	self.WarriorFrame:SetFrameStrata('MEDIUM')
 	self.WarriorFrame.Icon = self.WarriorFrame:CreateTexture(nil, 'ARTWORK')
 	self.WarriorFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
@@ -747,6 +816,37 @@ function Rat.Mainframe:ConfigFrame()
 				else
 					Rat_Settings[this:GetName()] = 1
 					self.WarriorFrame.Icon:SetVertexColor(1.0, 1.0, 1.0)
+				end
+			end
+		end)
+		
+	-- Priest option frame
+	local r, l, t, b = Rat:ClassPos("Priest")
+	self.PriestFrame = CreateFrame('Button', "Priest", self)
+	self.PriestFrame:SetWidth(16)
+	self.PriestFrame:SetHeight(16)
+	self.PriestFrame:SetPoint('TOPRIGHT', -60, -1)
+	self.PriestFrame:SetFrameStrata('MEDIUM')
+	self.PriestFrame.Icon = self.PriestFrame:CreateTexture(nil, 'ARTWORK')
+	self.PriestFrame.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
+	self.PriestFrame.Icon:SetTexCoord(r, l, t, b)
+	self.PriestFrame.Icon:SetPoint('TOPRIGHT', -1, -1)
+	self.PriestFrame.Icon:SetWidth(16)
+	self.PriestFrame.Icon:SetHeight(16)
+	self.PriestFrame:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(self.PriestFrame, "ANCHOR_TOPRIGHT");
+		GameTooltip:SetText(this:GetName(), 1.0, 1.0, 1.0, 1, 1);
+		GameTooltip:Show()
+		end)
+	self.PriestFrame:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	self.PriestFrame:SetScript("OnMouseDown", function()
+			if (arg1 == "LeftButton") then
+				if Rat_Settings[this:GetName()] == 1 then
+					Rat_Settings[this:GetName()] = 0
+					self.PriestFrame.Icon:SetVertexColor(0.5, 0.5, 0.5)
+				else
+					Rat_Settings[this:GetName()] = 1
+					self.PriestFrame.Icon:SetVertexColor(1.0, 1.0, 1.0)
 				end
 			end
 		end)
@@ -843,7 +943,7 @@ function Rat.Options:ConfigFrame()
 	}
 	
 	self:SetFrameStrata("BACKGROUND")
-	self:SetWidth(875) -- Set these to whatever height/width is needed 
+	self:SetWidth(1015) -- Set these to whatever height/width is needed 
 	self:SetHeight(400) -- for your Texture
 	self:SetPoint("CENTER",UIParent,"CENTER",0,0)
 	self:SetMovable(1)
@@ -879,7 +979,7 @@ function Rat.Options:ConfigFrame()
 	-- Topmid Background Frame
 	local backdrop = {bgFile = "Interface\\auctionframe\\ui-auctionframe-auction-top"}  -- path to the background texture
 	self.Background.Topmid:SetFrameStrata("BACKGROUND")
-	self.Background.Topmid:SetWidth(482) -- Set these to whatever height/width is needed 
+	self.Background.Topmid:SetWidth(640) -- Set these to whatever height/width is needed 
 	self.Background.Topmid:SetHeight(200) -- for your Texture
 	self.Background.Topmid:SetBackdrop(backdrop)
 	self.Background.Topmid:SetPoint("TOPLEFT", self, "TOPLEFT", 193, 9)
@@ -890,7 +990,7 @@ function Rat.Options:ConfigFrame()
 	self.Background.Topright:SetWidth(200) -- Set these to whatever height/width is needed 
 	self.Background.Topright:SetHeight(200) -- for your Texture
 	self.Background.Topright:SetBackdrop(backdrop)
-	self.Background.Topright:SetPoint("TOPLEFT", self, "TOPLEFT", 675, 9)
+	self.Background.Topright:SetPoint("TOPLEFT", self, "TOPLEFT", 815, 9)
 	
 	-- Bottomleft Background Frame
 	local backdrop = {bgFile = "Interface\\auctionframe\\ui-auctionframe-bid-botleft"}  -- path to the background texture
@@ -903,7 +1003,7 @@ function Rat.Options:ConfigFrame()
 	-- Bottommid Background Frame
 	local backdrop = {bgFile = "Interface\\auctionframe\\ui-auctionframe-auction-bot"}  -- path to the background texture
 	self.Background.Bottommid:SetFrameStrata("BACKGROUND")
-	self.Background.Bottommid:SetWidth(482) -- Set these to whatever height/width is needed 
+	self.Background.Bottommid:SetWidth(640) -- Set these to whatever height/width is needed 
 	self.Background.Bottommid:SetHeight(296) -- for your Texture
 	self.Background.Bottommid:SetBackdrop(backdrop)
 	self.Background.Bottommid:SetPoint("TOPLEFT", self, "TOPLEFT", 193, -191)
@@ -914,12 +1014,12 @@ function Rat.Options:ConfigFrame()
 	self.Background.Bottomright:SetWidth(200) -- Set these to whatever height/width is needed 
 	self.Background.Bottomright:SetHeight(296) -- for your Texture
 	self.Background.Bottomright:SetBackdrop(backdrop)
-	self.Background.Bottomright:SetPoint("TOPLEFT", self, "TOPLEFT", 675, -191)
+	self.Background.Bottomright:SetPoint("TOPLEFT", self, "TOPLEFT", 815, -191)
 	
 	-- Tab1 Background Frame
 	local backdrop = {bgFile = "Interface\\raidframe\\ui-raidframe-groupbg"}  -- path to the background texture
 	self.Background.Tab1:SetFrameStrata("LOW")
-	self.Background.Tab1:SetWidth(865) -- Set these to whatever height/width is needed 
+	self.Background.Tab1:SetWidth(1003) -- Set these to whatever height/width is needed 
 	self.Background.Tab1:SetHeight(348) -- for your Texture
 	self.Background.Tab1:SetBackdrop(backdrop)
 	self.Background.Tab1:SetPoint("TOPLEFT", self, "TOPLEFT", 6, -48)	
@@ -927,7 +1027,7 @@ function Rat.Options:ConfigFrame()
 	-- Tab2 Background Frame
 	local backdrop = {bgFile = "Interface\\raidframe\\ui-raidframe-groupbg"}  -- path to the background texture
 	self.Background.Tab2:SetFrameStrata("LOW")
-	self.Background.Tab2:SetWidth(865) -- Set these to whatever height/width is needed 
+	self.Background.Tab2:SetWidth(1003) -- Set these to whatever height/width is needed 
 	self.Background.Tab2:SetHeight(348) -- for your Texture
 	self.Background.Tab2:SetBackdrop(backdrop)
 	self.Background.Tab2:SetPoint("TOPLEFT", self, "TOPLEFT", 6, -48)	
@@ -1194,9 +1294,24 @@ function Rat.Options:ConfigFrame()
 	self.Warlock.Icon = self.Warlock:CreateTexture(nil, 'ARTWORK')
 	self.Warlock.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
 	self.Warlock.Icon:SetTexCoord(r, l, t, b)
-	self.Warlock.Icon:SetPoint('CENTER', 0,155)
+	self.Warlock.Icon:SetPoint('CENTER', -20,155)
 	self.Warlock.Icon:SetWidth(25)
 	self.Warlock.Icon:SetHeight(25)
+	
+	-- Mage
+	local r, l, t, b = Rat:ClassPos("Mage")
+	self.Mage = CreateFrame("Frame",nil,self.Background.Tab1) -- Mage class frame
+	self.Mage:SetWidth(125)
+	self.Mage:SetHeight(250)
+	self.Mage:SetPoint('TOPLEFT', 160, -70)
+	self.Mage:SetBackdrop(backdrop)
+	self.Mage:SetBackdropColor(0,0,0,1)
+	self.Mage.Icon = self.Mage:CreateTexture(nil, 'ARTWORK')
+	self.Mage.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
+	self.Mage.Icon:SetTexCoord(r, l, t, b)
+	self.Mage.Icon:SetPoint('CENTER', 20,155)
+	self.Mage.Icon:SetWidth(25)
+	self.Mage.Icon:SetHeight(25)
 	
 	-- Rogue
 	local r, l, t, b = Rat:ClassPos("Rogue")
@@ -1209,7 +1324,7 @@ function Rat.Options:ConfigFrame()
 	self.Rogue.Icon = self.Rogue:CreateTexture(nil, 'ARTWORK')
 	self.Rogue.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
 	self.Rogue.Icon:SetTexCoord(r, l, t, b)
-	self.Rogue.Icon:SetPoint('CENTER', 0,155)
+	self.Rogue.Icon:SetPoint('CENTER', 20,155)
 	self.Rogue.Icon:SetWidth(25)
 	self.Rogue.Icon:SetHeight(25)
 	
@@ -1228,35 +1343,35 @@ function Rat.Options:ConfigFrame()
 	self.Paladin.Icon:SetWidth(25)
 	self.Paladin.Icon:SetHeight(25)
 	
-	-- Shaman
-	local r, l, t, b = Rat:ClassPos("Shaman")
-	self.Shaman = CreateFrame("Frame",nil,self.Background.Tab1) -- shaman class frame
-	self.Shaman:SetWidth(125)
-	self.Shaman:SetHeight(250)
-	self.Shaman:SetPoint('TOPLEFT', 440, -70)
-	self.Shaman:SetBackdrop(backdrop)
-	self.Shaman:SetBackdropColor(0,0,0,1)
-	self.Shaman.Icon = self.Shaman:CreateTexture(nil, 'ARTWORK')
-	self.Shaman.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
-	self.Shaman.Icon:SetTexCoord(r, l, t, b)
-	self.Shaman.Icon:SetPoint('CENTER', 0,155)
-	self.Shaman.Icon:SetWidth(25)
-	self.Shaman.Icon:SetHeight(25)
-	
 	-- Hunter
 	local r, l, t, b = Rat:ClassPos("Hunter")
 	self.Hunter = CreateFrame("Frame",nil,self.Background.Tab1) -- hunter class frame
 	self.Hunter:SetWidth(125)
 	self.Hunter:SetHeight(250)
-	self.Hunter:SetPoint('TOPLEFT', 580, -70)
+	self.Hunter:SetPoint('TOPLEFT', 300, -70)
 	self.Hunter:SetBackdrop(backdrop)
 	self.Hunter:SetBackdropColor(0,0,0,1)
 	self.Hunter.Icon = self.Hunter:CreateTexture(nil, 'ARTWORK')
 	self.Hunter.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
 	self.Hunter.Icon:SetTexCoord(r, l, t, b)
-	self.Hunter.Icon:SetPoint('CENTER', 0,155)
+	self.Hunter.Icon:SetPoint('CENTER', -20,155)
 	self.Hunter.Icon:SetWidth(25)
 	self.Hunter.Icon:SetHeight(25)
+	
+	-- Priest
+	local r, l, t, b = Rat:ClassPos("Priest")
+	self.Priest = CreateFrame("Frame",nil,self.Background.Tab1) -- Priest class frame
+	self.Priest:SetWidth(125)
+	self.Priest:SetHeight(250)
+	self.Priest:SetPoint('TOPLEFT', 580, -70)
+	self.Priest:SetBackdrop(backdrop)
+	self.Priest:SetBackdropColor(0,0,0,1)
+	self.Priest.Icon = self.Priest:CreateTexture(nil, 'ARTWORK')
+	self.Priest.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
+	self.Priest.Icon:SetTexCoord(r, l, t, b)
+	self.Priest.Icon:SetPoint('CENTER', 0,155)
+	self.Priest.Icon:SetWidth(25)
+	self.Priest.Icon:SetHeight(25)
 	
 	-- Druid
 	local r, l, t, b = Rat:ClassPos("Druid")
@@ -1272,6 +1387,21 @@ function Rat.Options:ConfigFrame()
 	self.Druid.Icon:SetPoint('CENTER', 0,155)
 	self.Druid.Icon:SetWidth(25)
 	self.Druid.Icon:SetHeight(25)
+	
+	-- Shaman
+	local r, l, t, b = Rat:ClassPos("Shaman")
+	self.Shaman = CreateFrame("Frame",nil,self.Background.Tab1) -- shaman class frame
+	self.Shaman:SetWidth(125)
+	self.Shaman:SetHeight(250)
+	self.Shaman:SetPoint('TOPLEFT', 860, -70)
+	self.Shaman:SetBackdrop(backdrop)
+	self.Shaman:SetBackdropColor(0,0,0,1)
+	self.Shaman.Icon = self.Shaman:CreateTexture(nil, 'ARTWORK')
+	self.Shaman.Icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
+	self.Shaman.Icon:SetTexCoord(r, l, t, b)
+	self.Shaman.Icon:SetPoint('CENTER', 0,155)
+	self.Shaman.Icon:SetHeight(25)
+	self.Shaman.Icon:SetWidth(25)
 
 	-- checkboxes
 
@@ -1341,17 +1471,17 @@ function Rat.Options:ConfigFrame()
 	text:SetShadowOffset(2,-2)
     text:SetText("Challenging Shout")
 	
-	-- Berserker Rage
-	local Checkbox = CreateFrame("CheckButton", "Berserker Rage", self.Warrior, "UICheckButtonTemplate")
+	-- Death Wish
+	local Checkbox = CreateFrame("CheckButton", "Death Wish", self.Warrior, "UICheckButtonTemplate")
 	Checkbox:SetPoint("CENTER",0,-10)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
 	Checkbox:SetScript("OnClick", function () 
 		if Checkbox:GetChecked() == nil then 
-			Rat_Settings["Berserker Rage"] = nil
+			Rat_Settings["Death Wish"] = nil
 		elseif Checkbox:GetChecked() == 1 then 
-			Rat_Settings["Berserker Rage"] = 1 
+			Rat_Settings["Death Wish"] = 1 
 		end
 		end)
 	Checkbox:SetScript("OnEnter", function() 
@@ -1360,9 +1490,9 @@ function Rat.Options:ConfigFrame()
 		GameTooltip:Show()
 	end)
 	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	Checkbox:SetChecked(Rat_Settings["Berserker Rage"])
+	Checkbox:SetChecked(Rat_Settings["Death Wish"])
 	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
-	Icon:SetTexture(cdtbl["Berserker Rage"])
+	Icon:SetTexture(cdtbl["Death Wish"])
 	Icon:SetWidth(25)
 	Icon:SetHeight(25)
 	Icon:SetPoint("CENTER",0,0)
@@ -1371,7 +1501,7 @@ function Rat.Options:ConfigFrame()
     text:SetFont("Fonts\\FRIZQT__.TTF", 12)
 	text:SetTextColor(1, 1, 1, 1)
 	text:SetShadowOffset(2,-2)
-    text:SetText("Berserker Rage")
+    text:SetText("Death Wish")
 	
 	-- Pummel
 	local Checkbox = CreateFrame("CheckButton", "Pummel", self.Warrior, "UICheckButtonTemplate")
@@ -1470,6 +1600,40 @@ function Rat.Options:ConfigFrame()
 	text:SetTextColor(1, 1, 1, 1)
 	text:SetShadowOffset(2,-2)
     text:SetText("Major Soulstone")
+	
+	-- Mage
+	
+	-- Counterspell
+	local Checkbox = CreateFrame("CheckButton", "Counterspell", self.Mage, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,35)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Counterspell"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Counterspell"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Counterspell"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Counterspell"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Mage:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Counterspell")
 	
 	-- Rogue
 	
@@ -1635,6 +1799,38 @@ function Rat.Options:ConfigFrame()
 	text:SetShadowOffset(2,-2)
     text:SetText("Divine Intervention")
 	
+	-- Bulwark of the Righteous
+	local Checkbox = CreateFrame("CheckButton", "Bulwark of the Righteous", self.Paladin, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,-100)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Bulwark of the Righteous"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Bulwark of the Righteous"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Bulwark of the Righteous"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Bulwark of the Righteous"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Warrior:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Bulwark of the Righteous")
+	
 	-- Shaman
 	
 	-- Mana Tide Totem
@@ -1701,11 +1897,43 @@ function Rat.Options:ConfigFrame()
 	text:SetShadowOffset(2,-2)
     text:SetText("Reincarnation")
 	
+	-- Mana Tide Totem
+	local Checkbox = CreateFrame("CheckButton", "Earth Shock", self.Shaman, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,-10)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Earth Shock"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Earth Shock"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Earth Shock"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Earth Shock"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Shaman:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Earth Shock")
+	
 	-- Hunter
 	
 	-- Tranquilizing Shot
 	local Checkbox = CreateFrame("CheckButton", "Tranquilizing Shot", self.Hunter, "UICheckButtonTemplate")
-	Checkbox:SetPoint("CENTER",0,80)
+	Checkbox:SetPoint("CENTER",0,35)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
@@ -1832,6 +2060,72 @@ function Rat.Options:ConfigFrame()
 	text:SetTextColor(1, 1, 1, 1)
 	text:SetShadowOffset(2,-2)
     text:SetText("Challenging Roar")
+	
+	-- Tranquility 
+	local Checkbox = CreateFrame("CheckButton", "Tranquility", self.Druid, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,-55)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Tranquility"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Tranquility"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Tranquility"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Tranquility"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Druid:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Tranquility")
+	
+	-- Priest
+	
+	-- Light Well
+	local Checkbox = CreateFrame("CheckButton", "Light Well", self.Priest, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,80)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Light Well"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Light Well"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Light Well"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Light Well"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Priest:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Light Well")
 	
 	-- icon
 	self.Icon = self:CreateTexture(nil, 'ARTWORK')
@@ -2631,33 +2925,33 @@ function Rat:Update(force)
 	else
 		Rat.Mainframe:Hide()
 	end
-	if UnitFactionGroup("player") == "Alliance" then
-		if not Rat.Mainframe.PaladinFrame:IsVisible() then
-			Rat.Mainframe.PaladinFrame:Show()
-		end
-		if not Rat.Options.Paladin:IsVisible() then
-			Rat.Options.Paladin:Show()
-		end
-		if Rat.Mainframe.ShamanFrame:IsVisible() then
-			Rat.Mainframe.ShamanFrame:Hide()
-		end
-		if Rat.Options.Shaman:IsVisible() then
-			Rat.Options.Shaman:Hide()
-		end
-	elseif UnitFactionGroup("player") == "Horde"  then
-		if not Rat.Mainframe.ShamanFrame:IsVisible() then		
-			Rat.Mainframe.ShamanFrame:Show()
-		end
-		if not Rat.Options.Shaman:IsVisible() then
-			Rat.Options.Shaman:Show()
-		end
-		if Rat.Mainframe.PaladinFrame:IsVisible() then
-			Rat.Mainframe.PaladinFrame:Hide()
-		end
-		if Rat.Options.Paladin:IsVisible()  then
-			Rat.Options.Paladin:Hide()
-		end
-	end
+	-- if UnitFactionGroup("player") == "Alliance" then
+	--	if not Rat.Mainframe.PaladinFrame:IsVisible() then
+	--		Rat.Mainframe.PaladinFrame:Show()
+	--	end
+	--	if not Rat.Options.Paladin:IsVisible() then
+	--		Rat.Options.Paladin:Show()
+	--	end
+	--	if Rat.Mainframe.ShamanFrame:IsVisible() then
+	--		Rat.Mainframe.ShamanFrame:Hide()
+	--	end
+	--	if Rat.Options.Shaman:IsVisible() then
+	--		Rat.Options.Shaman:Hide()
+	--	end
+	-- elseif UnitFactionGroup("player") == "Horde"  then
+	--	if not Rat.Mainframe.ShamanFrame:IsVisible() then		
+	--		Rat.Mainframe.ShamanFrame:Show()
+	--	end
+	--	if not Rat.Options.Shaman:IsVisible() then
+	--		Rat.Options.Shaman:Show()
+	--	end
+	--	if Rat.Mainframe.PaladinFrame:IsVisible() then
+	--		Rat.Mainframe.PaladinFrame:Hide()
+	--	end
+	--	if Rat.Options.Paladin:IsVisible()  then
+	--		Rat.Options.Paladin:Hide()
+	--	end
+	-- end
 	if Rat_Settings["Minimap"] == nil then
 		Rat.Minimap:Hide()
 	elseif Rat_Settings["Minimap"] == 1 then
