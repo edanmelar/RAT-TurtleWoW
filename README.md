@@ -1,4 +1,5 @@
 Raid Ability Tracker (RAT) by Atreyyo @ Vanillagaming.org - Edited by Mithadana @ Turtle-wow.org
+
 v1.10.0
 
 Updated and fixed for Turtle WoW. Shaman & Paladin will display regardless of faction. Some classes have been combined into the same frame to save space.
