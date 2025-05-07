@@ -6,46 +6,47 @@ Updated and fixed for Turtle WoW. Shaman & Paladin will display regardless of fa
 Currently displays the following cooldowns for everyone who has the addon installed.
 
 [Warrior]
-Shield Wall
-Challenging Shout
-Death Wish
-Pummel
-Disarm
+* Shield Wall
+* Challenging Shout
+* Death Wish
+* Pummel
+* Disarm
+
 
 [Warlock]
-Major Soulstone
+* Major Soulstone
 
 [Mage]
-Counterspell
+* Counterspell
 
 [Hunter]
-Tranquilizing Shot
+* Tranquilizing Shot
 
 [Rogue]
-Kick
+* Kick
 
 [Shaman]
-Mana Tide Totem
-Reincarnation
-Earth Shock
+* Mana Tide Totem
+* Reincarnation
+* Earth Shock
 
 [Paladin]
-Lay on Hands
-Blessing of Protection
-Divine Shield
-Divine Intervention
-Bulwark of the Righteous
+* Lay on Hands
+* Blessing of Protection
+* Divine Shield
+* Divine Intervention
+* Bulwark of the Righteous
 
 [Druid]
-Innervate
-Rebirth
-Challenging Roar
-Tranquility
+* Innervate
+* Rebirth
+* Challenging Roar
+* Tranquility
 
 [Slash Commands]
 
-/Rat show
-/Rat hide
-/Rat options
+* /Rat show
+* /Rat hide
+* /Rat options
 
 Hold down 'Alt' to move the window
