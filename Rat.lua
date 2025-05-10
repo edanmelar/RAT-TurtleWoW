@@ -41,7 +41,7 @@ if (GetLocale() == "deDE") then
 		["Ruhe"] = "Tranquility",
 		["Gegenzauber"] = "Counterspell",
 		["Erdschock"] = "Earth Shock",
-		["Lichtschacht"] = "Light Well",
+		["Lichtschacht"] = "Lightwell",
 	}
 elseif (GetLocale() == "frFR") then
 	L = { 
@@ -66,7 +66,7 @@ elseif (GetLocale() == "frFR") then
 		["Tranquillité"] = "Tranquility",
 		["Contresort"] = "Counterspell",
 		["Choc terrestre"] = "Earth Shock",
-		["Puits de lumière"] = "Light Well",
+		["Puits de lumière"] = "Lightwell",
 		
 	}
 else
@@ -92,7 +92,7 @@ else
 		["Tranquility"] = "Tranquility",
 		["Counterspell"] = "Counterspell",
 		["Earth Shock"] = "Earth Shock",
-		["Light Well"] = "Light Well",
+		["Lightwell"] = "Lightwell",
 	}
 end																	
 
@@ -128,7 +128,7 @@ cdtbl = {
 	["Tranquility"] = "Interface\\Icons\\Spell_Nature_Tranquility",
 	["Counterspell"] = "Interface\\Icons\\Spell_Frost_IceShock",
 	["Earth Shock"] = "Interface\\Icons\\Spell_Nature_EarthShock",
-	["Light Well"] = "Interface\\Icons\\Spell_Holy_SummonLightwell",
+	["Lightwell"] = "Interface\\Icons\\Spell_Holy_SummonLightwell",
 }
 
 Rat_Font = {
@@ -2095,17 +2095,17 @@ function Rat.Options:ConfigFrame()
 	
 	-- Priest
 	
-	-- Light Well
-	local Checkbox = CreateFrame("CheckButton", "Light Well", self.Priest, "UICheckButtonTemplate")
+	-- Lightwell
+	local Checkbox = CreateFrame("CheckButton", "Lightwell", self.Priest, "UICheckButtonTemplate")
 	Checkbox:SetPoint("CENTER",0,80)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
 	Checkbox:SetScript("OnClick", function () 
 		if Checkbox:GetChecked() == nil then 
-			Rat_Settings["Light Well"] = nil
+			Rat_Settings["Lightwell"] = nil
 		elseif Checkbox:GetChecked() == 1 then 
-			Rat_Settings["Light Well"] = 1 
+			Rat_Settings["Lightwell"] = 1 
 		end
 		end)
 	Checkbox:SetScript("OnEnter", function() 
@@ -2114,9 +2114,9 @@ function Rat.Options:ConfigFrame()
 		GameTooltip:Show()
 	end)
 	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	Checkbox:SetChecked(Rat_Settings["Light Well"])
+	Checkbox:SetChecked(Rat_Settings["Lightwell"])
 	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
-	Icon:SetTexture(cdtbl["Light Well"])
+	Icon:SetTexture(cdtbl["Lightwell"])
 	Icon:SetWidth(25)
 	Icon:SetHeight(25)
 	Icon:SetPoint("CENTER",0,0)
@@ -2125,7 +2125,7 @@ function Rat.Options:ConfigFrame()
     text:SetFont("Fonts\\FRIZQT__.TTF", 12)
 	text:SetTextColor(1, 1, 1, 1)
 	text:SetShadowOffset(2,-2)
-    text:SetText("Light Well")
+    text:SetText("Lightwell")
 	
 	-- icon
 	self.Icon = self:CreateTexture(nil, 'ARTWORK')
