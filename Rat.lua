@@ -36,7 +36,6 @@ if (GetLocale() == "deDE") then
 		["Einlullender Schuss"] = "Tranquilizing Shot",
 		["Tritt"] = "Kick",
 		["Reinkarnation"] = "Reincarnation",
-		["Totem der Manaflut"] = "Mana Tide Totem",
 		["Bollwerk der Rechtschaffenen"] = "Bulwark of the Righteous",
 		["Ruhe"] = "Tranquility",
 		["Gegenzauber"] = "Counterspell",
@@ -61,7 +60,6 @@ elseif (GetLocale() == "frFR") then
 		["Tir Tranquillisant"] = "Tranquilizing Shot",
 		["Coup de pied"] = "Kick",
 		["Réincarnation"] = "Reincarnation",
-		["Totem Fontaine de mana"] = "Mana Tide Totem",
 		["Rempart des Justes"] = "Bulwark of the Righteous",
 		["Tranquillité"] = "Tranquility",
 		["Contresort"] = "Counterspell",
@@ -87,7 +85,6 @@ else
 		["Tranquilizing Shot"] = "Tranquilizing Shot",
 		["Kick"] = "Kick",
 		["Reincarnation"] = "Reincarnation",
-		["Mana Tide Totem"] = "Mana Tide Totem",
 		["Bulwark of the Righteous"] = "Bulwark of the Righteous",
 		["Tranquility"] = "Tranquility",
 		["Counterspell"] = "Counterspell",
@@ -123,7 +120,6 @@ cdtbl = {
 	["Tranquilizing Shot"] = "Interface\\Icons\\Spell_Nature_Drowsy",
 	["Kick"] = "Interface\\Icons\\Ability_Kick",
 	["Reincarnation"] = "Interface\\Icons\\Spell_Nature_Reincarnation",
-	["Mana Tide Totem"] = "Interface\\Icons\\Spell_Frost_SummonWaterElemental",
 	["Bulwark of the Righteous"] = "Interface\\Icons\\Ability_Warrior_VictoryRush",
 	["Tranquility"] = "Interface\\Icons\\Spell_Nature_Tranquility",
 	["Counterspell"] = "Interface\\Icons\\Spell_Frost_IceShock",
@@ -1833,41 +1829,9 @@ function Rat.Options:ConfigFrame()
 	
 	-- Shaman
 	
-	-- Mana Tide Totem
-	local Checkbox = CreateFrame("CheckButton", "Mana Tide Totem", self.Shaman, "UICheckButtonTemplate")
-	Checkbox:SetPoint("CENTER",0,80)
-	Checkbox:SetWidth(35)
-	Checkbox:SetHeight(35)
-	Checkbox:SetFrameStrata("LOW")
-	Checkbox:SetScript("OnClick", function () 
-		if Checkbox:GetChecked() == nil then 
-			Rat_Settings["Mana Tide Totem"] = nil
-		elseif Checkbox:GetChecked() == 1 then 
-			Rat_Settings["Mana Tide Totem"] = 1 
-		end
-		end)
-	Checkbox:SetScript("OnEnter", function() 
-		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
-		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
-		GameTooltip:Show()
-	end)
-	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	Checkbox:SetChecked(Rat_Settings["Mana Tide Totem"])
-	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
-	Icon:SetTexture(cdtbl["Mana Tide Totem"])
-	Icon:SetWidth(25)
-	Icon:SetHeight(25)
-	Icon:SetPoint("CENTER",0,0)
-	local text = self.Shaman:CreateFontString(nil, "OVERLAY")
-    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
-    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
-	text:SetTextColor(1, 1, 1, 1)
-	text:SetShadowOffset(2,-2)
-    text:SetText("Mana Tide Totem")
-	
 	-- Reincarnation
 	local Checkbox = CreateFrame("CheckButton", "Reincarnation", self.Shaman, "UICheckButtonTemplate")
-	Checkbox:SetPoint("CENTER",0,35)
+	Checkbox:SetPoint("CENTER",0,80)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
@@ -1897,9 +1861,9 @@ function Rat.Options:ConfigFrame()
 	text:SetShadowOffset(2,-2)
     text:SetText("Reincarnation")
 	
-	-- Mana Tide Totem
+	-- Earth Shock
 	local Checkbox = CreateFrame("CheckButton", "Earth Shock", self.Shaman, "UICheckButtonTemplate")
-	Checkbox:SetPoint("CENTER",0,-10)
+	Checkbox:SetPoint("CENTER",0,35)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
