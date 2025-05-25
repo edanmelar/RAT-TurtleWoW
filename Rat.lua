@@ -41,6 +41,8 @@ if (GetLocale() == "deDE") then
 		["Gegenzauber"] = "Counterspell",
 		["Erdschock"] = "Earth Shock",
 		["Lichtschacht"] = "Lightwell",
+		["Rasende Regeneration"] = "Frenzied Regeneration",
+		["Geisterverbindung"] = "Spirit Link",
 	}
 elseif (GetLocale() == "frFR") then
 	L = { 
@@ -65,6 +67,8 @@ elseif (GetLocale() == "frFR") then
 		["Contresort"] = "Counterspell",
 		["Choc terrestre"] = "Earth Shock",
 		["Puits de lumière"] = "Lightwell",
+		["Régénération frénétique"] = "Frenzied Regeneration",
+		["Lien spirituel"] = "Spirit Link",
 		
 	}
 else
@@ -90,6 +94,8 @@ else
 		["Counterspell"] = "Counterspell",
 		["Earth Shock"] = "Earth Shock",
 		["Lightwell"] = "Lightwell",
+		["Frenzied Regeneration"] = "Frenzied Regeneration",
+		["Spirit Link"] = "Spirit Link",
 	}
 end																	
 
@@ -125,6 +131,8 @@ cdtbl = {
 	["Counterspell"] = "Interface\\Icons\\Spell_Frost_IceShock",
 	["Earth Shock"] = "Interface\\Icons\\Spell_Nature_EarthShock",
 	["Lightwell"] = "Interface\\Icons\\Spell_Holy_SummonLightwell",
+	["Frenzied Regeneration"] = "Interface\\Icons\\Ability_BullRush",
+	["Spirit Link"] = "Interface\\Icons\\Spell_Shaman_SpiritLink",
 }
 
 Rat_Font = {
@@ -1635,7 +1643,7 @@ function Rat.Options:ConfigFrame()
 	
 	-- Kick
 	local Checkbox = CreateFrame("CheckButton", "Kick", self.Rogue, "UICheckButtonTemplate")
-	Checkbox:SetPoint("CENTER",0,80)
+	Checkbox:SetPoint("CENTER",0,35)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
@@ -1892,12 +1900,44 @@ function Rat.Options:ConfigFrame()
 	text:SetTextColor(1, 1, 1, 1)
 	text:SetShadowOffset(2,-2)
     text:SetText("Earth Shock")
+
+	-- Spirit Link
+	local Checkbox = CreateFrame("CheckButton", "Spirit Link", self.Shaman, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,35)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Spirit Link"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Spirit Link"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Spirit Link"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Spirit Link"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Shaman:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Spirit Link")
 	
 	-- Hunter
 	
 	-- Tranquilizing Shot
 	local Checkbox = CreateFrame("CheckButton", "Tranquilizing Shot", self.Hunter, "UICheckButtonTemplate")
-	Checkbox:SetPoint("CENTER",0,35)
+	Checkbox:SetPoint("CENTER",0,80)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
@@ -2056,6 +2096,101 @@ function Rat.Options:ConfigFrame()
 	text:SetTextColor(1, 1, 1, 1)
 	text:SetShadowOffset(2,-2)
     text:SetText("Tranquility")
+
+	local Checkbox = CreateFrame("CheckButton", "Barkskin", self.Druid, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,-100)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Tranquility"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Tranquility"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Tranquility"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Tranquility"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Druid:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Tranquility")
+
+
+	-- Frenzied Regeneration
+	local Checkbox = CreateFrame("CheckButton", "Frenzied Regeneration", self.Druid, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,-100)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Frenzied Regeneration"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Frenzied Regeneration"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Frenzied Regeneration"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Frenzied Regeneration"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Druid:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Frenzied Regeneration")
+
+	local Checkbox = CreateFrame("CheckButton", "Barkskin", self.Druid, "UICheckButtonTemplate")
+	Checkbox:SetPoint("CENTER",0,-100)
+	Checkbox:SetWidth(35)
+	Checkbox:SetHeight(35)
+	Checkbox:SetFrameStrata("LOW")
+	Checkbox:SetScript("OnClick", function () 
+		if Checkbox:GetChecked() == nil then 
+			Rat_Settings["Frenzied Regeneration"] = nil
+		elseif Checkbox:GetChecked() == 1 then 
+			Rat_Settings["Frenzied Regeneration"] = 1 
+		end
+		end)
+	Checkbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(Checkbox, "ANCHOR_RIGHT");
+		GameTooltip:SetText("Turn on/off", 255, 255, 0, 1, 1);
+		GameTooltip:Show()
+	end)
+	Checkbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	Checkbox:SetChecked(Rat_Settings["Frenzied Regeneration"])
+	local Icon = Checkbox:CreateTexture(nil, 'ARTWORK',1)
+	Icon:SetTexture(cdtbl["Frenzied Regeneration"])
+	Icon:SetWidth(25)
+	Icon:SetHeight(25)
+	Icon:SetPoint("CENTER",0,0)
+	local text = self.Druid:CreateFontString(nil, "OVERLAY")
+    text:SetPoint("CENTER", Checkbox, "CENTER", 0, 25)
+    text:SetFont("Fonts\\FRIZQT__.TTF", 12)
+	text:SetTextColor(1, 1, 1, 1)
+	text:SetShadowOffset(2,-2)
+    text:SetText("Frenzied Regeneration")
 	
 	-- Priest
 	
