@@ -1,6 +1,6 @@
 Raid Ability Tracker (RAT) by Atreyyo @ Vanillagaming.org - Edited by Mithadana @ Turtle-wow.org
 
-v1.10.2
+v1.10.3
 
 Updated and fixed for Turtle WoW. Shaman & Paladin will display regardless of faction. Some classes have been combined into the same frame to save space.
 
@@ -29,6 +29,7 @@ Currently displays the following cooldowns for everyone who has the addon instal
 [Shaman]
 * Reincarnation
 * Earth Shock
+* Spirit Link
 
 [Paladin]
 * Lay on Hands
@@ -42,6 +43,7 @@ Currently displays the following cooldowns for everyone who has the addon instal
 * Rebirth
 * Challenging Roar
 * Tranquility
+* Frenzied Regeneration
 
 [Priest]
 * Light Well
