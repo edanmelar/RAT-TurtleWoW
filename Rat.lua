@@ -1977,7 +1977,7 @@ function Rat.Options:ConfigFrame()
 	
 	-- Innervate 
 	local Checkbox = CreateFrame("CheckButton", "Innervate", self.Druid, "UICheckButtonTemplate")
-	Checkbox:SetPoint("CENTER",-20,80)
+	Checkbox:SetPoint("CENTER",-30,80)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
@@ -2009,7 +2009,7 @@ function Rat.Options:ConfigFrame()
 	
 	-- Rebirth
 	local Checkbox = CreateFrame("CheckButton", "Rebirth", self.Druid, "UICheckButtonTemplate")
-	Checkbox:SetPoint("CENTER",20,80)
+	Checkbox:SetPoint("CENTER",30,80)
 	Checkbox:SetWidth(35)
 	Checkbox:SetHeight(35)
 	Checkbox:SetFrameStrata("LOW")
