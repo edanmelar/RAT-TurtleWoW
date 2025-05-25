@@ -44,6 +44,7 @@ Currently displays the following cooldowns for everyone who has the addon instal
 * Challenging Roar
 * Tranquility
 * Frenzied Regeneration
+* Barkskin (Feral)
 
 [Priest]
 * Light Well
